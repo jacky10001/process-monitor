@@ -25,6 +25,7 @@ class MonitorThread(Thread):
         
     def run(self):
         count = 0
+        self.open = True
         while self.open:
             pids = psutil.pids()
             if count%self.interval == 0:
@@ -41,6 +42,7 @@ class MonitorThread(Thread):
                     self.view.notify(cpu_percent, mem_percent)
                 except:
                     self.lineNotifyMessage("錯誤!! 程式已關閉......")
+                    self.view.onStop()
                     break
             time.sleep(0.5)
             count += 1
