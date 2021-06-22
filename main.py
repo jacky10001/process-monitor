@@ -42,7 +42,8 @@ class MonitorThread(Thread):
                     self.view.notify(cpu_percent, mem_percent)
                 except:
                     self.lineNotifyMessage("錯誤!! 程式已關閉......")
-                    self.view.onStop()
+                    self.stop()
+                    self.view.reconnect_signal("start")
                     break
             time.sleep(0.5)
             count += 1
