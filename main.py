@@ -33,6 +33,8 @@ class MonitorThread(Thread):
                     self.lineNotifyMessage("PID %d 執行中 !!!"%self.process_pid)
                 else:
                     self.lineNotifyMessage("找不到 PID %d ..."%self.process_pid)
+                    self.stop()
+                    self.view.reconnect_signal("start")
                     break
             if count%2 == 0:
                 try:
