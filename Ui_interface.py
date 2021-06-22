@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'd:\GitHub\process-monitor\interface.ui'
+# Form implementation generated from reading ui file 'd:\jacky\test_code\process-monitor-main\interface.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -14,14 +14,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(401, 401)
+        Form.resize(401, 501)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(Form.sizePolicy().hasHeightForWidth())
         Form.setSizePolicy(sizePolicy)
-        Form.setMinimumSize(QtCore.QSize(401, 401))
-        Form.setMaximumSize(QtCore.QSize(401, 401))
+        Form.setMinimumSize(QtCore.QSize(401, 501))
+        Form.setMaximumSize(QtCore.QSize(401, 501))
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(12)
@@ -29,10 +29,10 @@ class Ui_Form(object):
         font.setWeight(75)
         Form.setFont(font)
         self.btn_event = QtWidgets.QPushButton(Form)
-        self.btn_event.setGeometry(QtCore.QRect(10, 330, 380, 61))
+        self.btn_event.setGeometry(QtCore.QRect(10, 430, 380, 61))
         self.btn_event.setObjectName("btn_event")
         self.lineEdit = QtWidgets.QLineEdit(Form)
-        self.lineEdit.setGeometry(QtCore.QRect(25, 100, 351, 41))
+        self.lineEdit.setGeometry(QtCore.QRect(25, 90, 351, 41))
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(16)
@@ -53,7 +53,7 @@ class Ui_Form(object):
         self.lbl_title.setAlignment(QtCore.Qt.AlignCenter)
         self.lbl_title.setObjectName("lbl_title")
         self.lbl_title2 = QtWidgets.QLabel(Form)
-        self.lbl_title2.setGeometry(QtCore.QRect(0, 70, 401, 20))
+        self.lbl_title2.setGeometry(QtCore.QRect(0, 60, 401, 20))
         self.lbl_title2.setAlignment(QtCore.Qt.AlignCenter)
         self.lbl_title2.setObjectName("lbl_title2")
         self.line = QtWidgets.QFrame(Form)
@@ -61,6 +61,21 @@ class Ui_Form(object):
         self.line.setFrameShape(QtWidgets.QFrame.HLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
+        self.lineEdit_2 = QtWidgets.QLineEdit(Form)
+        self.lineEdit_2.setGeometry(QtCore.QRect(25, 170, 351, 41))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(16)
+        font.setBold(True)
+        font.setWeight(75)
+        self.lineEdit_2.setFont(font)
+        self.lineEdit_2.setText("")
+        self.lineEdit_2.setAlignment(QtCore.Qt.AlignCenter)
+        self.lineEdit_2.setObjectName("lineEdit_2")
+        self.lbl_title2_2 = QtWidgets.QLabel(Form)
+        self.lbl_title2_2.setGeometry(QtCore.QRect(0, 140, 401, 20))
+        self.lbl_title2_2.setAlignment(QtCore.Qt.AlignCenter)
+        self.lbl_title2_2.setObjectName("lbl_title2_2")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -72,3 +87,5 @@ class Ui_Form(object):
         self.lineEdit.setToolTip(_translate("Form", "<html><head/><body><p><span style=\" font-size:9pt;\">Enter the PID of program</span></p></body></html>"))
         self.lbl_title.setText(_translate("Form", "Process Monitor"))
         self.lbl_title2.setText(_translate("Form", "Process PID Number"))
+        self.lineEdit_2.setToolTip(_translate("Form", "<html><head/><body><p><span style=\" font-size:9pt;\">Enter the PID of program</span></p></body></html>"))
+        self.lbl_title2_2.setText(_translate("Form", "Your LINE Token"))

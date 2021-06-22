@@ -3,35 +3,63 @@ import os
 import sys
 import time
 import psutil
-from threading import Thread, Event
+import numpy as np
+from pyqtgraph import PlotWidget
+from threading import Thread
 from Ui_interface import Ui_Form
 from PyQt5 import QtCore, QtGui, QtWidgets
+import requests
 
 
 class MonitorThread(Thread):
-    def __init__(self, view, process_pid):
+    def __init__(self, view, process_pid, token):
         super(MonitorThread, self).__init__()
         self.view = view
         self.process_pid = process_pid
-        self.interval = 60
+        self.interval = 1800 * 2
         self.open = True
         self.daemon = True
-        self.exit_event = Event()
+        self.token = token
+        self.lineNotifyMessage("監控程式啟動......")
         
     def run(self):
+        count = 0
         while self.open:
             pids = psutil.pids()
-            if self.process_pid in pids:
-                print("PID is live !!!")
-            else:
-                print("Not found PID ...")
-            if self.exit_event.wait(self.interval):
-                break
-        print()
+            if count%self.interval == 0:
+                if self.process_pid in pids:
+                    self.lineNotifyMessage("PID %d 執行中 !!!"%self.process_pid)
+                else:
+                    self.lineNotifyMessage("找不到 PID %d ..."%self.process_pid)
+                    break
+            if count%2 == 0:
+                try:
+                    proc = psutil.Process(self.process_pid)
+                    cpu_percent = proc.cpu_percent()
+                    mem_percent = proc.memory_percent()
+                    self.view.notify(cpu_percent, mem_percent)
+                except:
+                    self.lineNotifyMessage("錯誤!! 程式已關閉......")
+                    break
+            time.sleep(0.5)
+            count += 1
+        self.view.reconnect_signal("start")
+        self.lineNotifyMessage("監控程式已關閉......")
+    
+    def lineNotifyMessage(self, msg):
+        print(msg)
+        headers = {
+            "Authorization": "Bearer " + self.token,
+            "Content-Type" : "application/x-www-form-urlencoded"
+        }
+        payload = {"message": msg }
+        r = requests.post(
+            "https://notify-api.line.me/api/notify",
+            headers=headers, params=payload)
+        return r.status_code
     
     def stop(self):
         self.open = False
-
 
 
 class MyApp(QtWidgets.QMainWindow, Ui_Form):    
@@ -40,6 +68,26 @@ class MyApp(QtWidgets.QMainWindow, Ui_Form):
         self.setupUi(self)
         self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
         self.btn_event.clicked.connect(self.onStart)
+        self.token = ""
+
+        # Add PlotWidget control
+        self.plotWidget_ted = PlotWidget(self)
+        # Set the size and relative position of the control
+        self.plotWidget_ted.setGeometry(QtCore.QRect(20,230,351,181))
+
+        # Copy the data in the mode1 code
+        # Generate 300 normally distributed random numbers
+        self.data1 = np.zeros((300))
+
+        self.curve1 = self.plotWidget_ted.plot(self.data1, name="mode1")
+    
+    def notify(self, cpu_percent, mem_percent):
+        current_time = time.strftime('%Y%m%d-%H%M%S',time.localtime(time.time()))
+        line = "Time: {} CPU: {} Memory: {}".format(current_time, cpu_percent, mem_percent)
+        print (line)
+        self.data1[:-1] = self.data1[1:]
+        self.data1[-1] = mem_percent
+        self.curve1.setData(self.data1)
 
     def onStart(self):
         if self.lineEdit.text() == "":
@@ -48,8 +96,12 @@ class MyApp(QtWidgets.QMainWindow, Ui_Form):
         if not self.lineEdit.text().isdigit():
             print("Error!! Please enter digit ...")
             return
+        if not self.lineEdit_2.text():
+            print("Error!! Please enter token ...")
+            return
+        token = self.lineEdit_2.text()
         process_pid = int(self.lineEdit.text())
-        self.monitor = MonitorThread(self, process_pid)
+        self.monitor = MonitorThread(self, process_pid, token)
         self.monitor.start()
         self.reconnect_signal("stop")
 
