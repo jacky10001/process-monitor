@@ -4,6 +4,7 @@ import sys
 import time
 import psutil
 import numpy as np
+import pyqtgraph as pg
 from pyqtgraph import PlotWidget
 from threading import Thread
 from Ui_interface import Ui_Form
@@ -43,20 +44,20 @@ class MonitorThread(Thread):
                     break
             time.sleep(0.5)
             count += 1
-        self.view.reconnect_signal("start")
         self.lineNotifyMessage("監控程式已關閉......")
     
     def lineNotifyMessage(self, msg):
         print(msg)
-        headers = {
-            "Authorization": "Bearer " + self.token,
-            "Content-Type" : "application/x-www-form-urlencoded"
-        }
-        payload = {"message": msg }
-        r = requests.post(
-            "https://notify-api.line.me/api/notify",
-            headers=headers, params=payload)
-        return r.status_code
+        if self.token:
+            headers = {
+                "Authorization": "Bearer " + self.token,
+                "Content-Type" : "application/x-www-form-urlencoded"
+            }
+            payload = {"message": msg }
+            r = requests.post(
+                "https://notify-api.line.me/api/notify",
+                headers=headers, params=payload)
+            return r.status_code
     
     def stop(self):
         self.open = False
@@ -70,14 +71,14 @@ class MyApp(QtWidgets.QMainWindow, Ui_Form):
         self.btn_event.clicked.connect(self.onStart)
         self.token = ""
 
+        
+        pg.setConfigOption('background', 'w')
+        pg.setConfigOption('foreground', 'k')
         # Add PlotWidget control
         self.plotWidget_ted = PlotWidget(self)
         # Set the size and relative position of the control
         self.plotWidget_ted.setGeometry(QtCore.QRect(20,230,351,181))
-
-        # Copy the data in the mode1 code
-        # Generate 300 normally distributed random numbers
-        self.data1 = np.zeros((300))
+        self.data1 = np.zeros((100))
 
         self.curve1 = self.plotWidget_ted.plot(self.data1, name="mode1")
     
@@ -97,8 +98,8 @@ class MyApp(QtWidgets.QMainWindow, Ui_Form):
             print("Error!! Please enter digit ...")
             return
         if not self.lineEdit_2.text():
-            print("Error!! Please enter token ...")
-            return
+            print("Warning!! Not enter token ...")
+            print("Only print message to window ...")
         token = self.lineEdit_2.text()
         process_pid = int(self.lineEdit.text())
         self.monitor = MonitorThread(self, process_pid, token)
