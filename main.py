@@ -16,7 +16,7 @@ class MonitorThread(Thread):
         super(MonitorThread, self).__init__()
         self.view = view
         self.process_pid = process_pid
-        self.interval = 1800 * 2
+        self.interval = 300
         self.open = True
         self.daemon = True
         self.token = token
