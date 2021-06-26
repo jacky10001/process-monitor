@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'd:\jacky\test_code\process-monitor-main\interface.ui'
+# Form implementation generated from reading ui file 'd:\GitHub\process-monitor\interface.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -14,14 +14,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(401, 501)
+        Form.resize(401, 551)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(Form.sizePolicy().hasHeightForWidth())
         Form.setSizePolicy(sizePolicy)
-        Form.setMinimumSize(QtCore.QSize(401, 501))
-        Form.setMaximumSize(QtCore.QSize(401, 501))
+        Form.setMinimumSize(QtCore.QSize(401, 551))
+        Form.setMaximumSize(QtCore.QSize(401, 551))
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(12)
@@ -29,7 +29,7 @@ class Ui_Form(object):
         font.setWeight(75)
         Form.setFont(font)
         self.btn_event = QtWidgets.QPushButton(Form)
-        self.btn_event.setGeometry(QtCore.QRect(10, 430, 380, 61))
+        self.btn_event.setGeometry(QtCore.QRect(10, 480, 291, 61))
         self.btn_event.setObjectName("btn_event")
         self.lineEdit = QtWidgets.QLineEdit(Form)
         self.lineEdit.setGeometry(QtCore.QRect(25, 90, 351, 41))
@@ -72,10 +72,28 @@ class Ui_Form(object):
         self.lineEdit_2.setText("")
         self.lineEdit_2.setAlignment(QtCore.Qt.AlignCenter)
         self.lineEdit_2.setObjectName("lineEdit_2")
-        self.lbl_title2_2 = QtWidgets.QLabel(Form)
-        self.lbl_title2_2.setGeometry(QtCore.QRect(0, 140, 401, 20))
-        self.lbl_title2_2.setAlignment(QtCore.Qt.AlignCenter)
-        self.lbl_title2_2.setObjectName("lbl_title2_2")
+        self.lbl_title3 = QtWidgets.QLabel(Form)
+        self.lbl_title3.setGeometry(QtCore.QRect(0, 140, 401, 20))
+        self.lbl_title3.setAlignment(QtCore.Qt.AlignCenter)
+        self.lbl_title3.setObjectName("lbl_title3")
+        self.btn_openCronUi = QtWidgets.QPushButton(Form)
+        self.btn_openCronUi.setGeometry(QtCore.QRect(310, 480, 75, 61))
+        self.btn_openCronUi.setText("")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("d:\\GitHub\\process-monitor\\setup.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_openCronUi.setIcon(icon)
+        self.btn_openCronUi.setIconSize(QtCore.QSize(64, 64))
+        self.btn_openCronUi.setFlat(True)
+        self.btn_openCronUi.setObjectName("btn_openCronUi")
+        self.lbl_title4 = QtWidgets.QLabel(Form)
+        self.lbl_title4.setGeometry(QtCore.QRect(0, 220, 401, 20))
+        self.lbl_title4.setAlignment(QtCore.Qt.AlignCenter)
+        self.lbl_title4.setObjectName("lbl_title4")
+        self.lbl_alarm = QtWidgets.QLabel(Form)
+        self.lbl_alarm.setGeometry(QtCore.QRect(0, 450, 371, 20))
+        self.lbl_alarm.setText("")
+        self.lbl_alarm.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.lbl_alarm.setObjectName("lbl_alarm")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -88,4 +106,5 @@ class Ui_Form(object):
         self.lbl_title.setText(_translate("Form", "Process Monitor"))
         self.lbl_title2.setText(_translate("Form", "Process PID Number"))
         self.lineEdit_2.setToolTip(_translate("Form", "<html><head/><body><p><span style=\" font-size:9pt;\">Enter the PID of program</span></p></body></html>"))
-        self.lbl_title2_2.setText(_translate("Form", "Your LINE Token"))
+        self.lbl_title3.setText(_translate("Form", "Your LINE Token"))
+        self.lbl_title4.setText(_translate("Form", "Memory Percent"))
