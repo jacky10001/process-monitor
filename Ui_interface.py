@@ -80,7 +80,7 @@ class Ui_Form(object):
         self.btn_openCronUi.setGeometry(QtCore.QRect(310, 480, 75, 61))
         self.btn_openCronUi.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("d:\\GitHub\\process-monitor\\setup.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("setup.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btn_openCronUi.setIcon(icon)
         self.btn_openCronUi.setIconSize(QtCore.QSize(64, 64))
         self.btn_openCronUi.setFlat(True)
