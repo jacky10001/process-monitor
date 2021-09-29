@@ -10,7 +10,7 @@ This is a simple monitoring tool on Win10.
 
 ## TODO
 
-[ ] add intervel time option
+- [ ] add intervel time option
 
 
 ## python env
