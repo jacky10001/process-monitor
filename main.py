@@ -99,6 +99,12 @@ class MyApp(QtWidgets.QMainWindow, Ui_Form):
         self.plotWidget_ted = PlotWidget(self)
         # Set the size and relative position of the control
         self.plotWidget_ted.setGeometry(QtCore.QRect(20,250,351,181))
+        # Set ticks and labels
+        ax = self.plotWidget_ted.getAxis('bottom')
+        lb = [i for i in range(0, 120, 20)]
+        ticks = [i for i in range(6)]
+        ax.setTicks([[(l, str(v)) for l, v in zip(lb, ticks) ]])
+        # Initial data
         self.data1 = np.zeros((100))
 
         self.curve1 = self.plotWidget_ted.plot(self.data1, name="mode1")
